@@ -4,4 +4,4 @@ PLUGIN_COMMENT=        OpenID Connect Authentication
 #PLUGIN_DEPENDS=
 PLUGIN_MAINTAINER= 	   lake@lachee.dev
 
-.include "../../Mk/plugins.mk"
+.include "/usr/plugins/Mk/plugins.mk"
