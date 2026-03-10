@@ -4,10 +4,24 @@ This package will allow you and your administrators to login to the OPNsense das
 ![img of settings](https://i.lu.je/2025/Discord_gfAMDTPfun.png)
 
 # Installation
-Download the package from releases and install on your opnsense via the console:
+To ensure that you're pulling the latest changes, recommended approach is to directly clone the repository directly onto your OPNSense machine and build it from there
+
+A shell script `install_opnsense_oidc.sh` is included in the repo to assist with the post-download installation
+
+If `git` is not already installed on your OPNSense machine (i.e., `git --version` returns "Command not found"), it can be added via
 ```
-pkg add os-oidc-1.0.pkg
+pkg install git
 ```
+Once `git` is installed (or if it's already available), run the following as a sudo-enabled user:
+```
+cd ~ \ # optional command to ensure you're in your user's home directory
+git clone git@github.com:nicolas-deroin/opnsense-oidc.git \ # To download via SSH
+git clone https://github.com/nicolas-deroin/opnsense-oidc.git \ # To download via HTTPS
+sudo chmod +x ./opnsense-oidc/install_opnsense_oidc.sh \
+sudo ./opnsense-oidc/install_opnsense_oidc.sh
+```
+
+The shell script will handle all file movement, building, and installing the final package. Once the shell script exits, you should have opnsense-oidc available in your OPNSense console
 
 ## Configuration
 ### Provider Url
@@ -55,7 +69,7 @@ As an example, here is one that makes a nice big icon next to the login button
 | ![old login](https://i.lu.je/2025/firefox_laeaoIMkWI.png) | ![new login](https://i.lu.je/2025/firefox_q6dNnOaA8b.png) |
 
 ## Mapping
-Users being logged in are mapped against the `preferred_name` claim and is checked against the local database's username and email fields.
+Users being logged in are mapped against the `preferred_username` claim and are checked against the local database's username and email fields.
 
 There is no group maaping at this stage.
 
@@ -119,5 +133,3 @@ Here are the steps i have gotten to work with setup.
 6. Copy the project's content to `/usr/plugins/devel/project-name`
 7. Build with `cd /usr/plugins/devel/project-name && make package`
 8. Install `pkg add /usr/plugins/devel/project-name/work/pkg/*.pkg`
-
-9. 
