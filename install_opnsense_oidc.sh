@@ -1,7 +1,7 @@
 #!/bin/sh
 
 plugins_path=/usr/plugins/devel
-home_path=/home/nicolasderoin
+home_path="$(cd "$(dirname "$0")/.." && pwd)" # Current parent directory
 project_name=opnsense-oidc
 package_name=os-oidc
 src_path=$home_path/$project_name
